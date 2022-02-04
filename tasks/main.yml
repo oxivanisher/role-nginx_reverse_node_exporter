@@ -23,6 +23,11 @@
     group: root
     state: link
 
+- name: disable default site in nginx
+  file:
+    dest: /etc/nginx/sites-enabled/node-exporter
+    state: absent
+
 - name: enable nginx
   service:
     name: nginx

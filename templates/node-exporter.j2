@@ -1,7 +1,8 @@
 server {
-    listen 80;
-    listen [::]:80;
-    server_name {{ ansible_hostname }}.{{ ansible_domain }};
+    listen 80 default_server;
+    listen [::]:80 default_server;
+    server_name _;
+    # server_name {{ ansible_hostname }}.{{ ansible_domain }};
 
 {% for host in nginx_reverse_node_exporter_hosts | sort %}
     location /{{ host.name }}/ {

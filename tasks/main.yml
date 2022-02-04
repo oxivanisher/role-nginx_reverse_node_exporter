@@ -25,7 +25,7 @@
 
 - name: disable default site in nginx
   file:
-    dest: /etc/nginx/sites-enabled/node-exporter
+    dest: /etc/nginx/sites-enabled/default
     state: absent
 
 - name: enable nginx

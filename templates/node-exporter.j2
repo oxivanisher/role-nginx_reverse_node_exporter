@@ -1,0 +1,11 @@
+server {
+    listen 80;
+    listen [::]:80;
+    server_name {{ ansible_hostname }}.{{ ansible_domain }};
+
+	{% for host in nginx_reverse_node_exporter_hosts | sort %}
+    location /{{ host.name }}/ {
+        proxy_pass           {{ host.url }};
+    }
+    {% endfor %}
+}

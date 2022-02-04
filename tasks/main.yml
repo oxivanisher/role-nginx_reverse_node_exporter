@@ -1,0 +1,31 @@
+---
+
+- name: ensure nginx is installed
+  package:
+    name: nginx
+    state: present
+
+- name: configure nginx config
+  template:
+    src: node-exporter.j2
+    dest: /etc/nginx/sites-available/node-exporter
+    owner: root
+    group: root
+    mode: '0644'
+  validate: /usr/bin/nginx -t -c %s
+  notify: restart nginx
+
+- name: enable node-exporter site in nginx
+  file:
+    src: /etc/nginx/sites-available/node-exporter
+    dest: /etc/nginx/sites-enabled/node-exporter
+    owner: root
+    group: root
+    state: link
+
+- name: enable nginx
+  service:
+    name: nginx
+    enabled: yes
+    state: started
+

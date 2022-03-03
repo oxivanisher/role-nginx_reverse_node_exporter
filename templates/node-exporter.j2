@@ -5,8 +5,7 @@ server {
     # server_name {{ ansible_hostname }}.{{ ansible_domain }};
 
 {% for host in nginx_reverse_node_exporter_hosts | sort %}
-    # entry for {{ host.name }}
-    location /{{ host.ip }}/ {
+    location /{{ host.name }}/metrics {
         proxy_pass           {{ host.url }};
     }
 {% endfor %}

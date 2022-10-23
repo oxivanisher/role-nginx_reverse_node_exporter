@@ -1,11 +1,11 @@
 ---
 
-- name: ensure nginx is installed
+- name: Ensure nginx is installed
   ansible.builtin.package:
     name: nginx
     state: present
 
-- name: configure nginx config
+- name: Configure nginx config
   ansible.builtin.template:
     src: node-exporter.j2
     dest: /etc/nginx/sites-available/node-exporter
@@ -13,9 +13,9 @@
     group: root
     mode: '0644'
     # validate: /usr/sbin/nginx -t -c %s
-  notify: restart nginx
+  notify: Restart nginx
 
-- name: enable node-exporter site in nginx
+- name: Enable node-exporter site in nginx
   ansible.builtin.file:
     src: /etc/nginx/sites-available/node-exporter
     dest: /etc/nginx/sites-enabled/node-exporter
@@ -23,12 +23,12 @@
     group: root
     state: link
 
-- name: disable default site in nginx
+- name: Disable default site in nginx
   ansible.builtin.file:
     dest: /etc/nginx/sites-enabled/default
     state: absent
 
-- name: enable nginx
+- name: Enable nginx
   ansible.builtin.service:
     name: nginx
     enabled: true

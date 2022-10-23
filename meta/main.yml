@@ -1,5 +1,6 @@
 galaxy_info:
   role_name: nginx_reverse_node_exporter
+  namespace: oxivanisher
   author: Marc Urben
   description: install and configure nginx as prometheus reverse proxy
   company: Thunderbluff
